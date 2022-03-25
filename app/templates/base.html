@@ -8,9 +8,14 @@
       {% endif %}
     </head>
     <body>
-        <div>PyBlog:
-            <a href="{{ url_for('index' }}">Home</a>
-            <a href="{{ url_for('login' }}">Login</a>
+        <div><p2>PyBlog</p2>:
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+             <a href="{{ url_for('login') }}">Login</a>
+            {% endif %}
         </div>
         <hr>
         {% with messages = get_flashed_messages() %}
