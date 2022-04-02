@@ -1,32 +1,27 @@
-<!DOCTYPE html>
-<html>
-    <head>
-      {% if title %}
-      <title>{{ title }} - PyBlog</title>
-      {% else %}
-      <title>Добро пожаловать в PyBlog</title>
-      {% endif %}
-    </head>
-    <body>
-        <div><p2>PyBlog</p2>:
-            <a href="{{ url_for('index') }}">Home</a>
-            {% if current_user.is_authenticated %}
-            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
-            {% else %}
-             <a href="{{ url_for('login') }}">Login</a>
-            {% endif %}
-        </div>
-        <hr>
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+    {% if title %}{{ title }} - PyBlog{% else %}Welcome to PyBlog{% endif %}
+{% endblock %}
+
+{% block navbar %}
+    <nav class="navbar navbar-default">
+        ... здесь должна быть навигационная панель  (см. полный код на GitHub) ...
+    </nav>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-        <ul>
             {% for message in messages %}
-            <li>{{ message }}</li>
+            <div class="alert alert-info" role="alert">{{ message }}</div>
             {% endfor %}
-        </ul>
         {% endif %}
         {% endwith %}
-        {% block content %}{% endblock %}
-    </body>
-</html>
+
+        {# содержимое приложения которое должно быть предоставлено в блоке app_content #}
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
+
