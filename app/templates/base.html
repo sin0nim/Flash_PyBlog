@@ -4,6 +4,12 @@
     {% if title %}{{ title }} - PyBlog{% else %}Welcome to PyBlog{% endif %}
 {% endblock %}
 
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+<!--    {{ moment.lang('ru') }} -->
+{% endblock %}
+
 {% block navbar %}
     <nav class="navbar navbar-default">
         ... здесь должна быть навигационная панель  (см. полный код на GitHub) ...
